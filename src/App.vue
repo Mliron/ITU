@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import Form from './components/Form'
+import Login from './components/Login'
 export default {
   name: 'App',
   components: {
-    Form
+    Login
   }
 }
 
