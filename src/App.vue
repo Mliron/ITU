@@ -1,26 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img src="fio.bmp" class="center">
+  <h1 align="center" class="title" >Přihlášení do aplikace Fio Broker</h1>
+  <div>
+    <Form/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Form from './components/Form'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Form
   }
 }
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  background: CornflowerBlue;
+  font-size: 18px;
+  border: 0;
+  padding: 1rem 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+ .title{
+
+  background:linear-gradient(to right, white 35%, DarkBlue 35% 65%,white 65%);
+  border: none;
+  font-size: 20px;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+
+ }
+
 </style>
