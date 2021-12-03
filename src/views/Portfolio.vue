@@ -16,9 +16,12 @@
     </div>
     <div class="graph" v-if="selected.shown">
       {{selected.name}} <br>
-      <a href="https://ej2.syncfusion.com/vue/documentation/stock-chart/getting-started-vue3/">
-        Very pog graph
-      </a>
+        <line-chart
+          :min="null"
+          :points="false"
+          :curve="false"
+          :data="noice"
+        />
     </div>
   </div>
 </template>
@@ -56,18 +59,22 @@
         selected:{
           name : "",
           shown: false
+        },
+        noice:{
+          "2015-04-05": 4
         }
       }
     },
     methods:{
-      POGGERS(data){
-        console.log(data);
-        if(this.selected.name == data){
+      POGGERS(name, data){
+        console.log(name);
+        if(this.selected.name == name){
           this.selected.shown = !this.selected.shown;
         }
         else{
-          this.selected.name = data; 
+          this.selected.name = name; 
           this.selected.shown = true;
+          this.noice = data;
         }
       }
     }
