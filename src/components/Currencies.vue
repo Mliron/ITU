@@ -1,13 +1,13 @@
 <template>
-<div class="position-relative">
-<div class="position-absolute top-0 start-0">
+<div class="user">
+<div class="tit">
 <h5>Kurz Mnen</h5>
-<input type="text" v-model="search" placeholder="Search title.."/>
+</div>
+<input type="text" v-model="search" placeholder="Search Currency.."/>
 <br>
 <table class="table table-bordered">
   <thead class="thead-light">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Měna</th>
       <th scope="col">Množství</th>
       <th scope="col">Kurz</th>
@@ -19,7 +19,6 @@
   </tr>
   </tbody>
 </table>
-</div>
 </div>
 </template>
 
@@ -68,6 +67,20 @@ export default {
   border: 3px solid darkblue;
 }
 
+.user {
+  position: absolute;
+  left: 158px;
+  top: 0px;
+  margin: auto;
+  width: 20%;
+  overflow-y: scroll;
+}
+.tit {
+  background: #f4f4f4;
+  margin: 7px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
 
 
 </style>

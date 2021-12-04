@@ -1,7 +1,8 @@
 <template>
-    <th scope="row">{{New.id}}</th>
-    <td>{{New.day}}</td>	
-    <td>{{New.text}}</td>
+<h4 id="list-item-1">{{New.headline}}</h4>
+  <p>{{New.text}}
+  <button onclick="location.href='https://www.webnoviny.sk/vofinanciach/'" type="button" class="btn btn-link">viac</button>
+  </p>
 </template>
 <script>
 export default {
@@ -9,7 +10,9 @@ export default {
 	props: {
 		New:Object
 	}
+
 }
+
 </script>
 
 <style >

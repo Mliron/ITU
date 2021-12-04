@@ -1,20 +1,11 @@
 <template>
-<div class="position-relative">
-<div class="position-absolute bottom-30 end-0"> 
-<table class="table table-dark table-striped">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Datum</th>
-      <th scope="col">Text</th>
-    </tr>
-  <tbody>
-  <tr v-bind:key="New" v-for="New in News">
-    <New :New="New"/>
-  </tr>
-  </tbody>
-</table>
+<img src="https://play-lh.googleusercontent.com/aCyq5_tBBCKcD5f4yuiE3kaNc1HDbPLA7Tq7PoEqBk1RVODSqJQUYpB_ekCrW23qnhw" class="news_img" />
+<div class="nav nav-pills nav-stacked anyClass">
+<div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="overflow-auto" tabindex="0" v-bind:key="New" v-for="New in News">
+  <New :New="New"/>
 </div>
 </div>
+
 </template>
 
 <script>
@@ -42,17 +33,22 @@ export default {
   width: auto;
   height: 150px;
   position: absolute;
-  right: 0px;
-  top: 8%;
+  right: 0%;
+  top: 0%;
 }
-.container2 {
+.anyClass {
   position: absolute;
   right: 0px;
-  top: 25%;
-  border-radius: 2px;
+  top: 20%;
   margin: auto;
   width: 25%;
-  border: 3px solid darkblue;
+  height: 70%;
+  overflow-y: scroll;
+}
+.buttons {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
