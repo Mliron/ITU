@@ -1,13 +1,14 @@
 <template>
-    <th scope="row">{{Currency.currency}}</th>
-    <td>{{Currency.amount}}</td>
-    <td>{{Currency.value}}</td>
+    <th scope="row">{{Index.name}}</th>
+    <td>{{Index.price}}</td>
+    <td>{{Index.value}}</td>
+    
 </template>
 <script>
 export default {
-	name: "Currency",
+	name: "Index",
 	props: {
-		Currency:Object
+		Index:Object
 	}
 }
 </script>
