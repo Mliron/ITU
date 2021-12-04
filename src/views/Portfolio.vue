@@ -1,27 +1,51 @@
 <template>
   <div class="portfolio">
-    <div>
-      <table>
-        <label v-for="(str, i) in pogger_keys" :key="i">
-          {{str}}
-        </label>
-        <tr v-for="(tru_pog, i) in poggers" :key="i">
-          <td>
-              <One_stock
-                :onclick="POGGERS"
-                :data="tru_pog"/>
-          </td>
-        </tr>
+    <div id="stocks" class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <label class="fw-bold" v-for="(str, i) in pogger_keys" :key="i">
+              {{str}}
+            </label>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(tru_pog, i) in poggers" :key="i">
+            <td>
+                <One_stock
+                  :onclick="POGGERS"
+                  :data="tru_pog"/>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-    <div class="graph" v-if="selected.shown">
-      {{selected.name}} <br>
+    <div id="details" class="col" v-if="selected.shown">
+      {{selected.name}}<br>
+      <div id="graph">
         <line-chart
           :min="null"
           :points="false"
           :curve="false"
           :data="noice"
         />
+      </div><br>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Statistics</th>
+              <th scope="col">Company info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name = eyyy</td>
+              <td>CEO cheated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -75,6 +99,7 @@
           this.selected.name = name; 
           this.selected.shown = true;
           this.noice = data;
+          console.log(data);
         }
       }
     }
@@ -82,9 +107,11 @@
 </script>
 
 <style scoped>
-  table { border-collapse: collapse; }
-  td { border: 1px solid black; }
   label { display: inline-block; width: 150px; font-size: 16px;}
-  div { float: left; }
-  .graph { width: 600px; height: 800px; border: 2px solid black; font-size: 32px; }
+  div {display: inline-block; margin: 10px;}
+  .col {float: left; height: 800px; }
+  .table { width: 700px; }
+  #stocks {height: 800px; }
+  #graph { width: 700px; padding: 0 10px;}
+  #details {display: block; height: 800; border: 2px solid black; font-size: 32px;}
 </style>

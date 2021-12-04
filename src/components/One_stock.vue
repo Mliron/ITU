@@ -21,6 +21,7 @@
         for(var j = 1; j <= 12; j++){
           for (var i = 0; i < 31; i++) {
             start = Math.floor(Math.random()*(41)+(start-20));
+            if(start < 1) start = 1;
             this.stock_data["2021-"+((j<10)?("0"):(""))+j.toString()+"-"+((i<10)?("0"):(""))+i.toString()] = start;
           }
         }
