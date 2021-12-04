@@ -1,7 +1,7 @@
 <template>
     <nav id="navbar" class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <router-link id="name" class="fs-3 fw-bold text-decoration-none" to="/homepage">Fio Broker</router-link>
+        <router-link class="fs-3 fw-bold text-decoration-none" id="name" to="/homepage">Fio Broker</router-link>
         <form class="d-flex bd-highlight">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>

@@ -15,7 +15,6 @@
               </router-link>
             </li>
           </ul>
-          <hr>
         </div>
       </div>
       <div class="row justify-content-center">

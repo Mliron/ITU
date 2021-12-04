@@ -52,6 +52,7 @@
 
 <script>
   import One_stock from '@/components/One_stock.vue'  
+  import axios from 'axios'
 
   export default{
     components: {
@@ -61,31 +62,12 @@
       return{
         pogger_keys: ["Symbol", "Change Rate", "Buy", "Sell"],
         poggers:[
-          {
-            symbol : "Pog",
-            change : "0.666%",
-            buy    : "420",
-            sell   : "666"
-          },
-          {
-            symbol : "KEKW",
-            change : "0.42%",
-            buy    : "4542",
-            sell   : "4569"
-          },
-          {
-            symbol : "dogecoin",
-            change : "-1.58%",
-            buy    : "42069",
-            sell   : "50000"
-          },
         ],
         selected:{
           name : "",
           shown: false
         },
         noice:{
-          "2015-04-05": 4
         }
       }
     },
@@ -101,7 +83,21 @@
           this.noice = data;
           console.log(data);
         }
+      },
+      get_stonks(){
+        axios
+          .get("http://localhost:6969/data.json")
+          .then((response)=>{
+            console.log(response.data);
+            this.poggers = response.data;
+          })
+         .catch((error)=>{
+            console.log(error);
+          })
       }
+    },
+    mounted(){
+      this.get_stonks();
     }
   }
 </script>
