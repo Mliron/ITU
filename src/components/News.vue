@@ -1,5 +1,5 @@
 <template>
-<img src="https://play-lh.googleusercontent.com/aCyq5_tBBCKcD5f4yuiE3kaNc1HDbPLA7Tq7PoEqBk1RVODSqJQUYpB_ekCrW23qnhw" class="news_img" />
+<img src="https://p12cdn4static.sharpschool.com/UserFiles/Servers/Server_1023780/Image/News.jpg" class="news_img" />
 <div class="nav nav-pills nav-stacked anyClass">
 <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="overflow-auto" tabindex="0" v-bind:key="New" v-for="New in News">
   <New :New="New"/>
@@ -30,8 +30,8 @@ export default {
 
 <style>
 .news_img {
-  width: auto;
-  height: 150px;
+  width: 500px;
+  height: 200px;
   position: absolute;
   right: 0%;
   top: 0%;
@@ -39,10 +39,10 @@ export default {
 .anyClass {
   position: absolute;
   right: 0px;
-  top: 20%;
+  top: 25%;
   margin: auto;
   width: 25%;
-  height: 70%;
+  height: 65%;
   overflow-y: scroll;
 }
 .buttons {

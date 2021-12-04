@@ -1,7 +1,7 @@
 <template>
 <h4 id="list-item-1">{{New.headline}}</h4>
   <p>{{New.text}}
-  <button onclick="location.href='https://www.webnoviny.sk/vofinanciach/'" type="button" class="btn btn-link">viac</button>
+ <a :href="New.link" class="btn btn-primary">viac</a>
   </p>
 </template>
 <script>

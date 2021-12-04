@@ -1,8 +1,7 @@
 <template>
     <th scope="row">{{Index.name}}</th>
     <td>{{Index.price}}</td>
-    <td>{{Index.value}}</td>
-    
+    <td>{{Index.value}}</td>  
 </template>
 <script>
 export default {

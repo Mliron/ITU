@@ -140,25 +140,29 @@
     ],
     this.Calendar =[
     {
-      name: "DAX",
-      price: "1023",
-      value: "+3.33%"
+      flag: "https://flagpedia.net/data/flags/w1600/fr.png",
+      country: "FR",
+      text: "asdasdasd",
+      date: "23 semptember"
     },
     {
-      name: "EUROSTOX",
-      price: "1402",
-      value: "+0.99%"
+      flag: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
+      country: "USA",
+      text: "asdasdasd",
+      date: "13 semptember"
     },
     {
-      name: "CAC 40",
-      price: "909",
-      value: "+0.48%"
+      flag: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg",
+      country: "CAN",
+      text: "asdasdasd",
+      date: "7 jula"
 
     },
     {
-      name: "CC",
-      price: "103",
-      value: "+3.3%"
+      flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/2560px-Flag_of_Germany.svg.png",
+      country: "GER",
+      text: "asdasdasd",
+      date: "5 juna"
     },
     ] 
 
