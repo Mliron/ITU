@@ -1,24 +1,11 @@
 <template>
   <div class="portfolio row d-flex">
-    <div id="stocks" class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <label class="fw-bold" v-for="(str, i) in pogger_keys" :key="i">
-              {{str}}
-            </label>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(tru_pog, i) in poggers" :key="i">
-            <td>
-                <One_stock
-                  :onclick="POGGERS"
-                  :data="tru_pog"/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="stocks" class="col fs-2">
+      <List
+        :col_names="columns"
+        :rows="company_data"
+        :onclick="detail_work"
+      />
     </div>
     <div class="col">
       <Detail
@@ -30,19 +17,19 @@
 </template>
 
 <script>
-  import One_stock from '@/components/One_stock.vue'
+  import Stock_list from '@/components/Stock_list.vue'
   import Position_detail from '@/components/Position_detail.vue'
   import axios from 'axios'
 
   export default{
     components: {
-      One_stock,
-      "Detail" : Position_detail
+      "List"  : Stock_list,
+      "Detail": Position_detail
     },
     data(){
       return{
-        pogger_keys: ["Symbol", "Buy", "Sell"],
-        poggers:[
+        columns: ["Symbol", "Average Price", "Current Price", "Revenue"],
+        company_data:[
         ],
         selected:{
           details : {},
@@ -53,7 +40,7 @@
       }
     },
     methods:{
-      POGGERS(data){
+      detail_work(data){
         if(this.selected.details.Symbol === data.Symbol){
           this.selected.shown = !this.selected.shown;
         }
@@ -68,7 +55,7 @@
           .get("http://localhost:6969/data.json")
           .then((response)=>{
             console.log(response.data);
-            this.poggers = response.data;
+            this.company_data = response.data;
           })
          .catch((error)=>{
             console.log(error);
@@ -82,9 +69,7 @@
 </script>
 
 <style scoped>
-  label { display: inline-block; width: 150px; font-size: 16px;}
-  div {display: inline-block; margin: 10px;}
+  div {display: inline-block;}
   .col {float: left; height: 800px; }
-  .table { width: 550px; }
   #stocks {height: 1000px; }
 </style>

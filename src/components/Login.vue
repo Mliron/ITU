@@ -50,7 +50,7 @@ export default {
   font-size: 20px;
     color: black;
     text-decoration: none;
-    margin: 4px 2px;
+    /*margin: 4px 2px;*/
 
  }
 </style>

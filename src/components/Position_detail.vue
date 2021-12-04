@@ -9,7 +9,7 @@
         </div>
       </div>
       <div id="graph" class="justify-content-center">
-        <line-chart
+        <area-chart
           :min="null"
           :points="false"
           :curve="false"
