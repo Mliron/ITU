@@ -1,6 +1,6 @@
 <template>
   <div class="one_stock" @click.left="send_data()">
-    <label v-for="(key, i) in data" :key="i">
+    <label id="info" v-for="(key, i) in data" :key="i">
       {{key}}
     </label>
   </div>
@@ -22,7 +22,7 @@
           .then((response)=>{
             console.log("Got '"+this.data.symbol+"' data!");
 
-            this.onclick(response.data.Name, response.data.data);
+            this.onclick(response.data);
           })
          .catch((error)=>{
             console.log(error);

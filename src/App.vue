@@ -1,11 +1,16 @@
 <template>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <Navbar 
-    :username="username"
+  <Navbar
     balance="66642069"
+    :username="username"
+    :themes="color_themes"
   />
   <div id="nav" class="row justify-content-start">
-    <Sidebar :routes="router_paths"/>
+    <Sidebar
+      :routes="router_paths"
+      :username="username"
+      :themes="color_themes"
+    />
   </div>
 </template>
 
@@ -33,7 +38,11 @@
             path: "/portfolio"
           },
         ],
-        username: "Mr. Bitches"
+        color_themes:{
+          default_green: "#8FBE00",
+          default_blue : "#00448A"
+        },
+        username: "Mr.Bitches"
       }
     }
   }
@@ -58,8 +67,4 @@
   color: #fff;
 }
 
-#nav a.router-link-exact-active {
-  color: #222;
-  background-color: #5472d3;
-}
 </style>

@@ -1,7 +1,7 @@
 <template>
     <nav id="navbar" class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <router-link class="fs-3 fw-bold text-decoration-none" id="name" to="/homepage">Fio Broker</router-link>
+        <router-link class="fs-1 fw-bold text-decoration-none" id="name" to="/homepage">Fio Broker</router-link>
         <form class="d-flex bd-highlight">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
@@ -20,17 +20,27 @@
 
 <script>
   export default{
-    props: ["username", "balance"]
+    props: ["balance", "username", "themes"],
+    data(){
+      return {
+        bg : "",
+        fg : ""
+      }
+    },
+    mounted(){
+      this.bg = this.themes.default_green;
+      this.fg = this.themes.default_blue;
+    }
   }
 </script>
 
 <style scoped>
   #navbar{
-    background-color: #9DC12B;
+    background-color: v-bind(bg);
   }
   #name{
     outline-color: black;
     outline-width: 2px;
-    color: #01448A;
+    color: v-bind(fg);
   }
 </style> 
