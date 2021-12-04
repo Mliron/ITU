@@ -1,5 +1,5 @@
 <template>
-  <div class="one_stock" @click.left="onclick(data.symbol)">
+  <div class="one_stock" @click.left="send_data()">
     <label v-for="(key, i) in data" :key="i">
       {{key}}
     </label>
@@ -11,6 +11,21 @@
     props: ["onclick", "data"],
     data(){
       return {
+        stock_data:{
+        }
+      }
+    },
+    methods:{
+      send_data(){
+        var start = Math.floor(Math.random()*(301)+100);
+        for(var j = 1; j <= 12; j++){
+          for (var i = 0; i < 31; i++) {
+            start = Math.floor(Math.random()*(41)+(start-20));
+            if(start < 1) start = 1;
+            this.stock_data["2021-"+((j<10)?("0"):(""))+j.toString()+"-"+((i<10)?("0"):(""))+i.toString()] = start;
+          }
+        }
+        this.onclick(this.data.symbol, this.stock_data);
       }
     }
   }
