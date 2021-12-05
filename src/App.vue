@@ -51,7 +51,8 @@
     },
     setup(){
       const cookies = useCookies()
-      cookies.set("username", "Rakosnik");
+      cookies.set("username", "name");
+      cookies.set("user_id", "1");
       cookies.set("server_host", "http://localhost:8000/");
     }
   }
