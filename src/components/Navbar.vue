@@ -88,7 +88,7 @@
     },
     methods:{
       async getInstrument(){
-        axios.get("http://localhost:8000/instrument/name/"+this.search)
+        axios.get(this.cookies.get("server_host")+"instrument/name/"+this.search)
         .then((response)=>{
           console.log(response.data)
           this.items = response.data
