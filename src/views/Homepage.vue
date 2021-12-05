@@ -36,8 +36,8 @@
       this.getIndexes()
   }, 
    methods : {
-    getNews(){
-      axios.get("http://localhost:8080/news")
+    async getNews(){
+      axios.get("http://localhost:8000/news")
       .then((response)=>{
         console.log(response.data)
         this.News = response.data
@@ -46,8 +46,8 @@
         console.log(error)
       })
     },
-    getCurrencies(){
-      axios.get("http://localhost:8080/exchange")
+    async getCurrencies(){
+      axios.get("http://localhost:8000/exchange")
       .then((response)=>{
         this.Currencies = response.data
       })
@@ -55,8 +55,8 @@
         console.log(error)
       })
     },
-    getIndexes(){
-      axios.post("http://localhost:8080/instrument/type/INDEX")
+    async getIndexes(){
+      axios.get("http://localhost:8000/instrument/type/INDEX")
       .then((response)=>{
         this.Indexes = response.data
       })
@@ -64,8 +64,8 @@
         console.log(error)
       })
     },
-    getCalendar(){
-      axios.get("http://localhost:6969/Calendar.json")
+    async getCalendar(){
+      axios.get("http://localhost:8000/calendar")
       .then((response)=>{
         this.Calendar = response.data
       })

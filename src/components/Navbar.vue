@@ -6,14 +6,14 @@
         </div>
         <div class="col">
           <form class="d-flex bd-highlight">
-            <input class="form-control" v-model="search" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search
+            <input class="form-control" v-model="search" type="search" placeholder="Search" aria-label="Search" @click="toggle()">
+            <button class="btn btn-outline-success" type="submit" @click.prevent="getInstrument()" @click="show()">Search
             </button>
           </form>
-            <div class="search">
+            <div class="search" v-if="active">
               <div v-bind:key="item" v-for="item in items"> 
                 <div class="col">
-                  <h4>{{item.message}}</h4>
+                  <a class="custom_button"> {{item.name}}</a>
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
- 
+  import axios from 'axios'
   export default{
     props: ["balance", "username", "themes"],
     data(){
@@ -45,13 +45,32 @@
         bg : "",
         fg : "",
         search : "",
-        items: [{ message: 'Foo' }, { message: 'Bar' }]
+        items : Array,
+        active : false
       }
     },
     mounted(){
       this.bg = this.themes.default_green;
       this.fg = this.themes.default_blue;
-    }
+    },
+    methods: {
+      async getInstrument(){
+      axios.get("http://localhost:8000/instrument/name/"+this.search)
+      .then((response)=>{
+        console.log(response.data)
+        this.items = response.data
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },
+      toggle(){
+        this.active = !this.active
+      },
+      show(){
+        this.active = true
+      }
+    },
 
 }
 </script>
@@ -67,16 +86,16 @@
   }
   .search {
   position: absolute;
-  left: 26%;
-  top: 33%;
-  margin: auto;
-  width: 20%;
+  left: 28%;
+  top: 62%;
   z-index: 100;
-  height: 200%;
-  opacity: 0.5;
-  overflow-y: scroll;
+  margin: auto;
+  width: 18%;
+  height: 100%;
+  background: white;
   }
   .custom_button {
+    cursor: pointer;
     width: 80%;
   }
 </style> 
