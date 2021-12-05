@@ -1,34 +1,24 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
 <template>
   <div class="one_stock" @click.left="send_data()">
-    <label id="info" v-for="(key, i) in data" :key="i">
+    <label id="info" v-for="(key, i) in row" :key="i">
       {{key}}
     </label>
   </div>
 </template>
 
 <script>
-  // import axios from 'axios'
-  // import { useCookies } from "@vueuse/integrations/useCookies"
 
 
   export default{
     props: ["onclick", "data"],
     data(){
       return {
+        row: this.data
       }
     },
     methods:{
       send_data(){
-        // axios
-        //   .get(this.cookies.get("server_host")+this.data.symbol+".json")
-        //   .then((response)=>{
-        //     console.log("Got '"+this.data.symbol+"' data!");
-
-        //     this.onclick(response.data);
-        //   })
-        //  .catch((error)=>{
-        //     console.log(error);
-        //   })
         this.onclick(this.data[1]);
       },
       send_random_data(){
@@ -43,10 +33,10 @@
         this.onclick(this.data.symbol, this.stock_data);
       }
     },
-    // setup(){
-    //   const cookies = useCookies();
-    //   return { cookies }
-    // }
+    mounted(){
+      this.row[2] = this.row[2].toFixed(2);
+      this.row[3] = this.row[3].toFixed(2);
+    }
   }
 </script>
 

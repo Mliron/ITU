@@ -1,3 +1,4 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
 <template>
   <div class="portfolio row d-flex">
     <div id="stocks" class="col fs-2">
@@ -31,7 +32,7 @@
     },
     data(){
       return{
-        columns: ["ID", "Symbol", "Average Price", "Current Price"],
+        columns: ["ID", "Symbol", "Closing Price", "Current Price"],
         rows:[],
         company_data:[],
         graph:{},
@@ -58,7 +59,7 @@
           .then((response)=>{
             console.log(response.data.positions);
             this.company_data = response.data.favourites;
-            this.company_data.forEach((val)=>{this.rows.push([val.id, val.symbol, val.averagePrice, val.currentPrice])});
+            this.company_data.forEach((val)=>{this.rows.push([val.id, val.symbol, val.closePrice, val.currentPrice])});
           })
          .catch((error)=>{
             console.log(error);

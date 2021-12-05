@@ -1,4 +1,5 @@
-<template><!-- Button to Open the Modal -->
+<!-- Author: xfabom01 (Matus Fabo) -->
+<template>
 <div class="popup" v-if="show">
   <label class="fs-4 fw-bold">{{type}}</label><br>
   <input type="number" placeholder="Amount" v-model="amount" />

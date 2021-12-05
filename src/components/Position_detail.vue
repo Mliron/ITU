@@ -1,3 +1,4 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
 <template>
   <div id="details" v-if="show" class="col justify-content-center">
       <div class="row">
@@ -8,6 +9,7 @@
           <span @click="buy_sell('buy')" class="btn buy">Buy</span>
           <input type="number" v-model="quantity" min="0"/>
           <span @click="buy_sell('sell')" class="btn sell">Sell</span>
+          <span @click="toggle_favorite()" class="fs-1 ms-3" id="fav">&#9734;</span>
         </div>
       </div>
       <div id="graph" class="justify-content-center">
@@ -20,10 +22,9 @@
       </div><br>
       <div>
         <ul class="nav nav-tabs nav-justified">
-          <li class="nav-link fs-6" @click.prevent="set_active('company_information')">Company information</li>
           <li class="nav-link fs-6" @click.prevent="set_active('statistics')">Statistics</li>
-          <li class="nav-link fs-6" @click.prevent="set_active('positions')">Positions</li>
-          <li class="nav-link fs-6" @click.prevent="set_active('news')">News</li>
+          <li class="nav-link fs-6" @click.prevent="set_active('company_information')">Company information</li>
+          <li class="nav-link fs-6" @click.prevent="set_active('positions');">Positions</li>
         </ul>
         <div class="tab-content py-2">
           <div class="tab-pane fade fs-6" :class="{'active show': is_active('company_information')}" id="company_information">
@@ -37,11 +38,12 @@
           </div>
           <div class="tab-pane fade fs-6" :class="{'active show': is_active('statistics')}" id="statistics">
             <table style="text-align: left;">
-              <tr><th class="tw-bold fs-5 px-2">Market Cap:</th> <td>69 B</td></tr>
-              <tr><th class="tw-bold fs-5 px-2">Target price:</th> <td>420</td></tr>
-              <tr><th class="tw-bold fs-5 px-2">Revenue:</th> <td>666</td></tr>
-              <tr><th class="tw-bold fs-5 px-2">Rev/Shr:</th> <td>42.69</td></tr>
-              <tr><th class="tw-bold fs-5 px-2">Div/Shr:</th> <td>21.48</td></tr>
+              <tr><th class="tw-bold fs-5 px-2">Current Price:</th> <td>{{instrumentModel.currentPrice}}</td></tr>
+              <tr><th class="tw-bold fs-5 px-2">Closing Price:</th> <td>{{instrumentModel.closePrice}}</td></tr>
+              <tr><th class="tw-bold fs-5 px-2">Market Cap:</th>    <td>{{instrumentModel.marketCap}}</td></tr>
+              <tr><th class="tw-bold fs-5 px-2">P/E:</th>           <td>{{instrumentModel.pe}}</td></tr>
+              <tr><th class="tw-bold fs-5 px-2">EPS:</th>           <td>{{instrumentModel.eps}}</td></tr>
+              <tr><th class="tw-bold fs-5 px-2">Dividend:</th>      <td>{{instrumentModel.dividend}}</td></tr>
             </table>
           </div>
           <div class="tab-pane fade fs-5" :class="{'active show': is_active('positions')}" id="positions">
@@ -56,13 +58,7 @@
                   </tr>
                 </thead>
                 <tbody id="pos_list">
-                  <tr>
-                    <th span="col">Total</th>
-                    <th span="col">Buy</th>
-                    <th span="col">3.14</th>
-                    <th span="col">10</th>
-                  </tr>
-                  <tr v-for="pos in company_data.positions" :key="pos.id">
+                  <tr v-for="pos in stuff" :key="pos.id">
                     <td span="col">{{pos.id}}</td>
                     <td span="col">{{pos.type}}</td>
                     <td span="col">{{pos.price}}</td>
@@ -71,14 +67,6 @@
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="tab-pane fade fs-5" style="text-align: left;" :class="{'active show': is_active('news')}" id="news">
-            <table>
-              <tr><a class="ext_link text-black px-2 text-decoration-none" href="https://i.pinimg.com/originals/86/41/d6/8641d6de409bfd8271b647db30229e6e.jpg">What happens when you go for a midnight snack.</a></tr>
-              <tr><a class="ext_link text-black px-2 text-decoration-none" href="https://www.forbes.com/uk/advisor/wp-content/uploads/2021/05/short-coated-tan-puppy-stockpack-unsplash-scaled.jpg">I'm tired.. Enjoy this puppy</a></tr>
-              <tr><a class="ext_link text-black px-2 text-decoration-none" href="https://www.cbc.ca/kidscbc2/content/the_feed/feathered-tree-viper.jpg">This snake looks nice</a></tr>
-              <tr><a class="ext_link text-black px-2 text-decoration-none" href="https://www.youtube.com/watch?v=-ujIz6nmvsE">Advanced warfare tactics</a></tr>
-            </table>
           </div>
         </div>
       </div>
@@ -90,12 +78,15 @@
   import { useCookies } from "@vueuse/integrations/useCookies"
 
   export default{
-    props: ["company_data", "instrumentModel", "graph", "show", "refresh"],
+    props: ["company_data", "instrumentModel", "graph", "show"],
     data(){
       return{
         shown: false,
-        active_item: "company_information",
+        active_item: "statistics",
         quantity: 0,
+        current_detail: 0,
+        stuff: [],
+        shown_ID: -1
       }
     },
     methods:{
@@ -117,14 +108,51 @@
           .post(this.cookies.get("server_host")+"user/"+this.cookies.get("user_id")+"/position", {positionModel:posModel, instrumentModel:this.instrumentModel})
           .then((response)=>{
             console.log(response);
-            this.refresh();
+            this.update_stuff();
           })
           .catch((error)=>{console.log(error)})
+      },
+      async update_stuff(){
+        axios
+          .get(this.cookies.get("server_host")+"user/"+this.cookies.get("user_id")+"/position/"+this.company_data.id)
+          .then((response)=>{
+            console.log(response);
+            this.stuff = response.data.positions;
+          })
+          .catch((error)=>{console.log(error)})
+
+        axios
+          .get(this.cookies.get("server_host")+"user/"+this.cookies.get("user_id")+"/favourite/"+this.instrumentModel.id)
+          .then((response)=>{
+            console.log(response);
+            var tmp = document.getElementById("fav");
+            tmp.innerHTML = "&#9733;";
+            // tmp.style("color: yellow;");
+          })
+          .catch((error)=>{
+            console.log(error);
+            var tmp = document.getElementById("fav");
+            tmp.innerHTML = "&#9734;";
+            // tmp.style("color: black;");
+          })
+      },
+      async toggle_favorite(){
+        console.log("Adding to favorite");
+        axios
+          .post(this.cookies.get("server_host")+"user/"+this.cookies.get("user_id")+"/favourite/"+this.instrumentModel.id)
+          .then((response)=>{console.log(response); this.update_stuff();})
+          .catch((error)=>{console.log(error);})
       }
     },
     setup(){
       const cookies = useCookies();
       return {cookies}
+    },
+    updated(){
+      if(this.shown_ID != this.company_data.id){
+        this.update_stuff();
+        this.shown_ID = this.company_data.id;
+      }
     }
   }
 </script>
@@ -139,4 +167,9 @@
   .sell {background-color: red; border-color: darkred; color: #FBB;}
   .btn:hover {color: white;}
   #details input {height: 30px; width: 50px; font-weight: normal; font-size: 16px; border-radius: 5px; border-style: solid;}
+  .scrollable {overflow-y: auto; max-height: 320px;}
+  #fav:hover { cursor: pointer;}
 </style>
+
+
+<!-- &#9734; &#9733; -->

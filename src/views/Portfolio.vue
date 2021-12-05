@@ -1,3 +1,5 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
+
 <template>
   <div class="portfolio row d-flex">
     <div id="stocks" class="col fs-2">
@@ -12,7 +14,6 @@
         :show="selected.shown"
         :graph="graph"
         :instrumentModel="selected.details.instrumentModel"
-        :refresh="get_stonks"
         :company_data="selected.details"
       />
     </div>

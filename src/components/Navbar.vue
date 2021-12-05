@@ -1,3 +1,4 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
 <template>
     <nav id="navbar" class="navbar navbar-expand-lg">
       <div class="container-fluid">
@@ -6,13 +7,13 @@
         </div>
         <div class="col-6">
           <form class="d-flex bd-highlight px-3" style="width: 400px;">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control" v-model="search" type="search" placeholder="Search" aria-label="Search" @click="toggle()">
+            <button class="btn btn-outline-success" type="submit" @click.prevent="getInstrument()" @click="show()">Search</button>
           </form>
           <div class="search" v-if="active">
             <div v-bind:key="item" v-for="item in items"> 
               <div class="col">
-                <a class="custom_button"> {{item.name}}</a>
+                <a class="custom_button" @click="$router.push('/result/' + item.id);"> {{item.name}}</a>
               </div>
             </div>
           </div>
@@ -145,13 +146,14 @@
   }
   .search {
   position: absolute;
-  left: 28%;
+  left: 12.3%;
   top: 62%;
   z-index: 100;
   margin: auto;
-  width: 18%;
-  height: 100%;
+  width: 290px;
+  height: 110%;
   background: white;
+  border: 1px solid gray;
   }
   .custom_button {
     cursor: pointer;

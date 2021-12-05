@@ -1,3 +1,4 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
 <template>
   <div class="container text-start fs-2">
     <scope class="fw-bold text-black">Info:</scope>

@@ -1,3 +1,4 @@
+<!-- Author: xfabom01 (Matus Fabo) -->
 <template>
   <div class="container-fluid position-fixed">
     <div class="row flex-nowrap">

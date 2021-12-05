@@ -4,6 +4,7 @@ import Portfolio from '@/views/Portfolio.vue'
 import Homepage from '@/views/Homepage.vue'
 import User from '@/views/User.vue'
 import Favorites from '@/views/Favorites.vue'
+import Result from '@/views/Result.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/favorites',
     name: 'Favorites',
     component: Favorites
+  },
+  {
+    path: '/result/:id',
+    name: 'Result',
+    component: Result
   }
 ]
 const router = createRouter({
