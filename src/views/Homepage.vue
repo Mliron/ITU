@@ -30,6 +30,10 @@
       Calendar : []
     }   
   },
+  setup(){
+      const cookies = useCookies();
+      return { cookies }
+    },
   created(){
       this.getNews()
       this.getCurrencies()
@@ -37,8 +41,7 @@
       this.getIndexes()
   }, 
    methods : {
-    getNews(){
-    
+    async getNews(){
       axios.get(this.cookies.get("server_host")+"news")
       .then((response)=>{
         console.log(response.data)
@@ -48,8 +51,8 @@
         console.log(error)
       })
     },
-    getCurrencies(){
-      axios.get("http://localhost:8080/exchange")
+    async getCurrencies(){
+      axios.get(this.cookies.get("server_host")+"exchange")
       .then((response)=>{
         this.Currencies = response.data
       })
@@ -57,8 +60,8 @@
         console.log(error)
       })
     },
-    getIndexes(){
-      axios.post("http://localhost:8080/instrument/type/INDEX")
+    async getIndexes(){
+      axios.get(this.cookies.get("server_host")+"instrument/type/INDEX")
       .then((response)=>{
         this.Indexes = response.data
       })
@@ -66,8 +69,8 @@
         console.log(error)
       })
     },
-    getCalendar(){
-      axios.get("http://localhost:6969/Calendar.json")
+    async getCalendar(){
+      axios.get(this.cookies.get("server_host")+"calendar")
       .then((response)=>{
         this.Calendar = response.data
       })
@@ -75,10 +78,6 @@
         console.log(error)
       })
     },
-    setup(){
-      const cookies = useCookies();
-      return { cookies }
-    }
   },
 
 }
