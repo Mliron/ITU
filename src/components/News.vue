@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
 <div class="tit_news">
 <h5>Noviny</h5>

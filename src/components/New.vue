@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
 <h4 id="list-item-1">{{New.title}}</h4>
   <p>{{New.text}}

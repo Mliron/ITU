@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
 <div class="user">
 <div class="tit">

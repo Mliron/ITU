@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
   <form class="form">
       <label for="name">Uživatelské jméno: </label><br>

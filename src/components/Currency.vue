@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
     <th scope="row">{{Currency.name}}</th>
     <td>{{Currency.percentage}}</td>

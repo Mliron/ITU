@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
     <th scope="row">{{Index.symbol}}</th>
     <td>{{Index.name}}</td>

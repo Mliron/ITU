@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
   <img src="fio.bmp" class="center">
   <Login_form />

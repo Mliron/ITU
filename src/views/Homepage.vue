@@ -1,3 +1,4 @@
+<!-- Author: xdreng01 (Vladimir Drengubiak) -->
 <template>
   <Homepage_user/>
   <News :News ="News"/>
