@@ -45,7 +45,6 @@
 
 <style scoped>
   table { border-collapse: collapse; }
-  .one_stock { padding: 0.2em 0; }
   .one_stock:hover { background-color: #666; }
   .one_stock:hover label { color: #fff; }
   label { display: inline-block; width: 150px; font-size: 16px;}
