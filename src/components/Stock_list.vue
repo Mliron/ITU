@@ -42,5 +42,5 @@
 
 <style scoped>
   label { display: inline-block; width: 150px; font-size: 16px;}
-  .table { width: 600px; }
+  .table { width: 650px; }
 </style>

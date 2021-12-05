@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import { useCookies } from "@vueuse/integrations/useCookies"
+  // import axios from 'axios'
+  // import { useCookies } from "@vueuse/integrations/useCookies"
 
 
   export default{
@@ -19,16 +19,17 @@
     },
     methods:{
       send_data(){
-        axios
-          .get(this.cookies.get("server_host")+this.data.symbol+".json")
-          .then((response)=>{
-            console.log("Got '"+this.data.symbol+"' data!");
+        // axios
+        //   .get(this.cookies.get("server_host")+this.data.symbol+".json")
+        //   .then((response)=>{
+        //     console.log("Got '"+this.data.symbol+"' data!");
 
-            this.onclick(response.data);
-          })
-         .catch((error)=>{
-            console.log(error);
-          })
+        //     this.onclick(response.data);
+        //   })
+        //  .catch((error)=>{
+        //     console.log(error);
+        //   })
+        this.onclick(this.data[1]);
       },
       send_random_data(){
         var start = Math.floor(Math.random()*(301)+100);
@@ -42,10 +43,10 @@
         this.onclick(this.data.symbol, this.stock_data);
       }
     },
-    setup(){
-      const cookies = useCookies();
-      return { cookies }
-    }
+    // setup(){
+    //   const cookies = useCookies();
+    //   return { cookies }
+    // }
   }
 </script>
 

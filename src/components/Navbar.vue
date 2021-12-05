@@ -4,43 +4,70 @@
         <div class="col">
           <router-link class="fs-1 fw-bold text-decoration-normal" id="name" to="/homepage">Fio Broker</router-link>
         </div>
-        <div class="col">
-          <form class="d-flex bd-highlight">
+        <div class="col-6">
+          <form class="d-flex bd-highlight px-3" style="width: 400px;">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
-        <div class="col">
-          <div class="fw-bold">Balance: {{balance}} EUR</div>
-          <div class="fw-bold">Position Balance: {{balance}} EUR</div>
-          <div class="fw-bold">Fiat Balance: {{balance}} EUR</div>
-          <button>Deposit</button>
-          <button>Withdraw</button>
+        <div class="col-2">
+          <div class="row">
+            <div class="col">
+              <div class="fw-bold">Balance: {{cookies.get('pos_bal')+cookies.get('fiat_bal')}}</div>
+              <div class="fw-bold">Position Balance: {{cookies.get('pos_bal')}}</div>
+              <div class="fw-bold">Fiat Balance: {{cookies.get('fiat_bal')}}</div>
+            </div>
+            <div class="col-2">
+              <button style="width: 100px;" @click="popup_show=true;popup_type='deposit'">Deposit</button><br>
+              <button style="width: 100px;" @click="popup_show=true;popup_type='withdraw'">Withdraw</button>
+            </div>
+          </div>
         </div>
         <div class="col">
-         <router-link to="/user" class="d-flex align-items-center text-black text-decoration-normal">
-            <img src="https://d2skuhm0vrry40.cloudfront.net/2021/articles/2021-04-01-14-58/2f0.png" alt="hugenerd" width="40" height="40" class="rounded-circle">
-            <span class="px-3 fs-4 fw-bold fst-normal">{{cookies.get("username")}}</span>
-            <span class="fs-4 fw-bold">Logout</span>
-          </router-link>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+               <router-link to="/user" class="d-flex align-items-center text-black text-decoration-normal">
+                  <span class="px-3 fs-4 fw-bold fst-normal">{{cookies.get("username")}}</span>
+                </router-link>
+            </div>
+            <div class="col">
+              <button @click="logout()" class="fs-5 fw-bold">Logout</button>
+            </div>
+          </div>
         </div>
       </div>
+      <Popup
+        :show="popup_show"
+        :onclick="money"
+        :type="popup_type"
+        :cancel="cancel"
+      />
     </nav>
 </template>
 
 <script>
+  import axios from 'axios'
   import { useCookies } from "@vueuse/integrations/useCookies";
+  import Popup from "@/components/Popup.vue"
   export default{
     props: ["balance", "username", "themes"],
+    components:{
+      Popup
+    },
     data(){
       return {
         bg : "",
-        fg : ""
+        fg : "",
+        popup_show: false,
+        popup_type: ""
       }
     },
     mounted(){
       this.bg = this.themes.default_green;
       this.fg = this.themes.default_blue;
+      this.update();
     },
     setup() {
       const cookies = useCookies();
@@ -48,6 +75,35 @@
         cookies,
       };
     },
+    methods:{
+      async money(type, amount){
+        const tmp = {
+          type: type,
+          amount: amount.toFixed(2)
+        }
+        console.log(tmp);
+        axios
+          .post(this.cookies.get("server_host")+"user/"+this.cookies.get("user_id")+"/depositWithdrawal", tmp)
+          .then((response)=>{console.log(response); this.update()})
+          .catch((error)=>{console.log(error);})
+        this.popup_show = false;
+      },
+      async update(){
+        axios
+          .get(this.cookies.get("server_host")+"user/"+this.cookies.get("user_id"))
+          .then((response)=>{
+            console.log(response);
+            this.cookies.set("pos_bal", response.data.positionsBalance);
+            this.cookies.set("fiat_bal", response.data.fiatBalance);
+          })
+      },
+      cancel(){
+        this.popup_show = false;
+      },
+      logout(){
+        console.log("Fuck off")
+      }
+    }
   }
 </script>
 

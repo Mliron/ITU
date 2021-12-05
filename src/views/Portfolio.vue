@@ -10,6 +10,9 @@
     <div class="col">
       <Detail
         :show="selected.shown"
+        :graph="graph"
+        :instrumentModel="selected.details.instrumentModel"
+        :refresh="get_stonks"
         :company_data="selected.details"
       />
     </div>
@@ -20,8 +23,8 @@
   import Stock_list from '@/components/Stock_list.vue'
   import Position_detail from '@/components/Position_detail.vue'
   import axios from 'axios'
-
   import { useCookies } from "@vueuse/integrations/useCookies"
+
   export default{
     components: {
       "List"  : Stock_list,
@@ -32,6 +35,7 @@
         columns: ["ID", "Symbol", "Average Price", "Current Price"],
         rows:[],
         company_data:[],
+        graph:{},
         selected:{
           details : {},
           shown   : false
@@ -42,14 +46,11 @@
     },
     methods:{
       detail_work(data){
-        if(this.selected.details.id === data.id){
-          this.selected.shown = !this.selected.shown;
-        }
-        else{
-          this.selected.details = data; 
-          this.selected.shown = true;
-          console.log(this.selected.shown);
-        }
+        this.company_data.forEach((val, index)=>{if(val.symbol === data) this.selected.details = this.company_data[index]});
+        var tmp = {};
+        this.selected.details.instrumentModel.prices.forEach((val)=>{tmp[val.x] = val.y;});
+        this.graph = tmp;
+        this.selected.shown = true;
       },
       async get_stonks(){
         console.log(this.cookies.get("server_host"));
@@ -58,6 +59,7 @@
           .then((response)=>{
             console.log(response.data.positions);
             this.company_data = response.data.positions;
+            this.rows = [];
             this.company_data.forEach((val)=>{this.rows.push([val.id, val.symbol, val.averagePrice, val.instrumentModel.currentPrice])});
           })
          .catch((error)=>{
