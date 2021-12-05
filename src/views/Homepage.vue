@@ -30,6 +30,10 @@
       Calendar : []
     }   
   },
+  setup(){
+      const cookies = useCookies();
+      return { cookies }
+    },
   created(){
       this.getNews()
       this.getCurrencies()
@@ -48,7 +52,7 @@
       })
     },
     async getCurrencies(){
-      axios.get("http://localhost:8000/exchange")
+      axios.get(this.cookies.get("server_host")+"exchange")
       .then((response)=>{
         this.Currencies = response.data
       })
@@ -57,7 +61,7 @@
       })
     },
     async getIndexes(){
-      axios.get("http://localhost:8000/instrument/type/INDEX")
+      axios.get(this.cookies.get("server_host")+"instrument/type/INDEX")
       .then((response)=>{
         this.Indexes = response.data
       })
@@ -66,7 +70,7 @@
       })
     },
     async getCalendar(){
-      axios.get("http://localhost:8000/calendar")
+      axios.get(this.cookies.get("server_host")+"calendar")
       .then((response)=>{
         this.Calendar = response.data
       })
@@ -74,10 +78,6 @@
         console.log(error)
       })
     },
-    setup(){
-      const cookies = useCookies();
-      return { cookies }
-    }
   },
 
 }
