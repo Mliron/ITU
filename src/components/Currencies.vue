@@ -41,13 +41,13 @@ export default {
   components:{
     Currency
   },
-    computed:{
-     filterCurrencies(){
-       return this.Currencies.filter( Currencies => {
-        console.log(Currencies.currency)
-       return !this.search ||
-        Currencies.currency.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-  })
+  
+  computed:{
+    filterCurrencies(){
+      return this.Currencies.filter( Currencies => {
+      return !this.search ||
+        Currencies.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+    })
   }
   }
 

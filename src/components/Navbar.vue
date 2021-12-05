@@ -6,10 +6,18 @@
         </div>
         <div class="col">
           <form class="d-flex bd-highlight">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control" v-model="search" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search
+            </button>
           </form>
-        </div>
+            <div class="search">
+              <div v-bind:key="item" v-for="item in items"> 
+                <div class="col">
+                  <h4>{{item.message}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
         <div class="col">
           <div class="fw-bold">Balance: {{balance}} EUR</div>
           <div class="fw-bold">Position Balance: {{balance}} EUR</div>
@@ -29,19 +37,23 @@
 </template>
 
 <script>
+ 
   export default{
     props: ["balance", "username", "themes"],
     data(){
       return {
         bg : "",
-        fg : ""
+        fg : "",
+        search : "",
+        items: [{ message: 'Foo' }, { message: 'Bar' }]
       }
     },
     mounted(){
       this.bg = this.themes.default_green;
       this.fg = this.themes.default_blue;
     }
-  }
+
+}
 </script>
 
 <style scoped>
@@ -52,5 +64,19 @@
     outline-color: black;
     outline-width: 2px;
     color: v-bind(fg);
+  }
+  .search {
+  position: absolute;
+  left: 26%;
+  top: 33%;
+  margin: auto;
+  width: 20%;
+  z-index: 100;
+  height: 200%;
+  opacity: 0.5;
+  overflow-y: scroll;
+  }
+  .custom_button {
+    width: 80%;
   }
 </style> 

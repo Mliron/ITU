@@ -37,8 +37,9 @@
   }, 
    methods : {
     getNews(){
-      axios.get("http://localhost:6969/News.json")
+      axios.get("http://localhost:8080/news")
       .then((response)=>{
+        console.log(response.data)
         this.News = response.data
       })
       .catch((error)=>{
@@ -46,7 +47,7 @@
       })
     },
     getCurrencies(){
-      axios.get("http://localhost:6969/Currencies.json")
+      axios.get("http://localhost:8080/exchange")
       .then((response)=>{
         this.Currencies = response.data
       })
@@ -55,7 +56,7 @@
       })
     },
     getIndexes(){
-      axios.get("http://localhost:6969/Indexes.json")
+      axios.post("http://localhost:8080/instrument/type/INDEX")
       .then((response)=>{
         this.Indexes = response.data
       })

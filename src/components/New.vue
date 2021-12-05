@@ -1,5 +1,5 @@
 <template>
-<h4 id="list-item-1">{{New.headline}}</h4>
+<h4 id="list-item-1">{{New.title}}</h4>
   <p>{{New.text}}
  <a :href="New.link" class="btn btn-primary">viac</a>
   </p>

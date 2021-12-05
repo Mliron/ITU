@@ -9,8 +9,8 @@
   <thead class="thead-light">
     <tr>
       <th scope="col">Burza</th>
+      <th scope="col">Meno</th>
       <th scope="col">Cena</th>
-      <th scope="col">Rast</th>
     </tr>
   </thead>
   <tbody id ="myTable">
@@ -43,9 +43,8 @@ export default {
     computed:{
      filterIndexes(){
        return this.Indexes.filter( Indexes => {
-        console.log(Indexes.name)
        return !this.search ||
-        Indexes.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+        Indexes.symbol.toLowerCase().indexOf(this.search.toLowerCase()) > -1
   })
   }
   }

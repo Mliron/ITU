@@ -1,7 +1,7 @@
 <template>
-    <th scope="row">{{Currency.currency}}</th>
-    <td>{{Currency.amount}}</td>
-    <td>{{Currency.value}}</td>
+    <th scope="row">{{Currency.name}}</th>
+    <td>{{Currency.percentage}}</td>
+    <td>{{Currency.rate}}</td>
 </template>
 <script>
 export default {

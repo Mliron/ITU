@@ -1,7 +1,7 @@
 <template>
-    <th scope="row">{{Index.name}}</th>
-    <td>{{Index.price}}</td>
-    <td>{{Index.value}}</td>  
+    <th scope="row">{{Index.symbol}}</th>
+    <td>{{Index.name}}</td>
+    <td>{{Index.currentPrice}}</td>  
 </template>
 <script>
 export default {
