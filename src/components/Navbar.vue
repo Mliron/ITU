@@ -57,11 +57,8 @@
 <script>
   import axios from 'axios'
   import { useCookies } from "@vueuse/integrations/useCookies";
-<<<<<<< HEAD
   import Popup from "@/components/Popup.vue"
-=======
 
->>>>>>> 712dac152544ee11afca98219a105bcc931e6268
   export default{
     props: ["balance", "username", "themes"],
     components:{
@@ -71,15 +68,11 @@
       return {
         bg : "",
         fg : "",
-<<<<<<< HEAD
-        popup_show: false,
-        popup_type: ""
-=======
         search : "",
         items : Array,
-        active : false
-
->>>>>>> 712dac152544ee11afca98219a105bcc931e6268
+        active : false,
+        popup_show: false,
+        popup_type: ""
       }
     },
     mounted(){
@@ -87,32 +80,29 @@
       this.fg = this.themes.default_blue;
       this.update();
     },
-    methods: {
-      async getInstrument(){
-      axios.get("http://localhost:8000/instrument/name/"+this.search)
-      .then((response)=>{
-        console.log(response.data)
-        this.items = response.data
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
-    },
-      toggle(){
-        this.active = !this.active
-      },
-      show(){
-        this.active = true
-      }
-    },
     setup() {
       const cookies = useCookies();
       return {
         cookies,
       };
-<<<<<<< HEAD
     },
     methods:{
+      async getInstrument(){
+        axios.get("http://localhost:8000/instrument/name/"+this.search)
+        .then((response)=>{
+          console.log(response.data)
+          this.items = response.data
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      },
+      toggle(){
+        this.active = !this.active
+      },
+      show(){
+        this.active = true
+      },
       async money(type, amount){
         const tmp = {
           type: type,
@@ -142,12 +132,6 @@
       }
     }
   }
-=======
-    }
-
-}
-
->>>>>>> 712dac152544ee11afca98219a105bcc931e6268
 </script>
 
 <style scoped>
