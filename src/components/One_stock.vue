@@ -8,6 +8,8 @@
 
 <script>
   import axios from 'axios'
+  import { useCookies } from "@vueuse/integrations/useCookies"
+
 
   export default{
     props: ["onclick", "data"],
@@ -18,7 +20,7 @@
     methods:{
       send_data(){
         axios
-          .get("http://localhost:6969/"+this.data.symbol+".json")
+          .get(this.cookies.get("server_host")+this.data.symbol+".json")
           .then((response)=>{
             console.log("Got '"+this.data.symbol+"' data!");
 
@@ -39,6 +41,10 @@
         }
         this.onclick(this.data.symbol, this.stock_data);
       }
+    },
+    setup(){
+      const cookies = useCookies();
+      return { cookies }
     }
   }
 </script>

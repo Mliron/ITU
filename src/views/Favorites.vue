@@ -1,11 +1,13 @@
 <template>
   <div class="portfolio row d-flex">
     <div id="stocks" class="col fs-2">
-      <List
-        :col_names="columns"
-        :rows="company_data"
-        :onclick="detail_work"
-      />
+      <div class="scrollable" style="max-height: 800px;">
+        <List
+          :col_names="columns"
+          :rows="company_data"
+          :onclick="detail_work"
+        />
+      </div>
     </div>
     <div class="col">
       <Detail
@@ -20,8 +22,8 @@
   import Stock_list from '@/components/Stock_list.vue'
   import Position_detail from '@/components/Position_detail.vue'
   import axios from 'axios'
-
   import { useCookies } from "@vueuse/integrations/useCookies"
+
   export default{
     components: {
       "List"  : Stock_list,
@@ -29,15 +31,13 @@
     },
     data(){
       return{
-        columns: ["Symbol", "Average Price", "Current Price", "Revenue"],
+        columns: ["Symbol", "Buy", "Sell"],
         company_data:[
         ],
         selected:{
           details : {},
           shown   : false
-        },
-        active_item: "company_information"
-        //loading: true
+        }
       }
     },
     methods:{
@@ -52,9 +52,8 @@
         }
       },
       async get_stonks(){
-        console.log(this.cookies.get("server_host"));
         axios
-          .get(this.cookies.get("server_host")+"data.json")
+          .get(this.cookies["server_host"]-"data.json")
           .then((response)=>{
             console.log(response.data);
             this.company_data = response.data;
@@ -69,13 +68,14 @@
     },
     setup(){
       const cookies = useCookies();
-      return { cookies }
+      return {cookies}
     }
   }
 </script>
 
 <style scoped>
   div {display: inline-block;}
-  .col {float: left; height: 800px; }
+  .scrollable { overflow-x: hidden; overflow-y: auto; }
+  .col {float: left; height: auto; }
   #stocks {height: 1000px; }
 </style>
