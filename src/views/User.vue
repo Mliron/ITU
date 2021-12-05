@@ -24,6 +24,7 @@
 
 <script>
   import axios from "axios";
+  import { useCookies } from "@vueuse/integrations/useCookies"
 
   export default {
     props: ["username"],
@@ -36,7 +37,7 @@
     methods:{
       async load_user(){
         axios
-          .get("http://localhost:6969/users/"+this.username+".json")
+          .get(this.cookies.get("server_host")+"users/"+this.username+".json")
           .then((response)=>{
             console.log(response.data);
             this.user_info = response.data;
@@ -48,6 +49,10 @@
     },
     mounted(){
       this.load_user();
+    },
+    setup(){
+      const cookies = useCookies();
+      return { cookies }
     }
   }
 </script>

@@ -17,6 +17,7 @@
 <script>
   import Navbar from "@/components/Navbar.vue"
   import Sidebar from "@/components/Sidebar.vue"
+  import { useCookies } from "@vueuse/integrations/useCookies"
   export default{
     components:{
       Navbar,
@@ -37,13 +38,21 @@
             name: "Portfolio",
             path: "/portfolio"
           },
+          {
+            name: "Favorites",
+            path: "/favorites"
+          },
         ],
         color_themes:{
           default_green: "#8FBE00",
           default_blue : "#00448A"
         },
-        username: "Mr.Bitches"
       }
+    },
+    setup(){
+      const cookies = useCookies()
+      cookies.set("username", "Rakosnik");
+      cookies.set("server_host", "http://localhost:8000/");
     }
   }
 </script>

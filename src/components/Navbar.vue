@@ -28,7 +28,7 @@
         <div class="col">
          <router-link to="/user" class="d-flex align-items-center text-black text-decoration-normal">
             <img src="https://d2skuhm0vrry40.cloudfront.net/2021/articles/2021-04-01-14-58/2f0.png" alt="hugenerd" width="40" height="40" class="rounded-circle">
-            <span class="px-3 fs-4 fw-bold fst-normal">{{username}}</span>
+            <span class="px-3 fs-4 fw-bold fst-normal">{{cookies.get("username")}}</span>
             <span class="fs-4 fw-bold">Logout</span>
           </router-link>
         </div>
@@ -38,6 +38,8 @@
 
 <script>
   import axios from 'axios'
+  import { useCookies } from "@vueuse/integrations/useCookies";
+
   export default{
     props: ["balance", "username", "themes"],
     data(){
@@ -47,6 +49,7 @@
         search : "",
         items : Array,
         active : false
+
       }
     },
     mounted(){
@@ -71,8 +74,15 @@
         this.active = true
       }
     },
+    setup() {
+      const cookies = useCookies();
+      return {
+        cookies,
+      };
+    }
 
 }
+
 </script>
 
 <style scoped>

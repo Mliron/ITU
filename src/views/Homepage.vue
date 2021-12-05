@@ -12,6 +12,7 @@
   import Indexes from "@/components/Indexes.vue"
   import Calendar from "@/components/Calendar.vue"
   import axios from 'axios'
+  import { useCookies } from "@vueuse/integrations/useCookies"
 
   export default{
     components: {
@@ -37,7 +38,7 @@
   }, 
    methods : {
     async getNews(){
-      axios.get("http://localhost:8000/news")
+      axios.get(this.cookies.get("server_host")+"news")
       .then((response)=>{
         console.log(response.data)
         this.News = response.data
@@ -72,6 +73,10 @@
       .catch((error)=>{
         console.log(error)
       })
+    },
+    setup(){
+      const cookies = useCookies();
+      return { cookies }
     }
   },
 
