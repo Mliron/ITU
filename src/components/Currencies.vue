@@ -1,16 +1,16 @@
 <template>
 <div class="user">
 <div class="tit">
-<h5>Kurz Mnen</h5>
+<h5>Měna</h5>
 </div>
 <input type="text" v-model="search" placeholder="Search Currency.."/>
 <br>
 <table class="table table-bordered">
   <thead class="thead-light">
     <tr>
-      <th scope="col">Měna</th>
-      <th scope="col">Množství</th>
-      <th scope="col">Kurz</th>
+      <th></th>
+      <th scope="col">Rast</th>
+      <th scope="col">Cena</th>
     </tr>
   </thead>
   <tbody id ="myTable">
@@ -19,6 +19,7 @@
   </tr>
   </tbody>
 </table>
+
 </div>
 </template>
 
@@ -34,7 +35,6 @@ export default {
   },
   data() {
     return {
-     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSOpd3naVkFzyakD0I9WEN592jxYwTRKunyhsWaUOaUdPqT9ST-C7gG76p_EZyhDPc79M&usqp=CAU",
      search: ''
     }   
   },
@@ -73,6 +73,7 @@ export default {
   top: 0px;
   margin: auto;
   width: 20%;
+  height: 45%;
   overflow-y: scroll;
 }
 .tit {

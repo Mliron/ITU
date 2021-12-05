@@ -69,16 +69,16 @@ export default {
 .indexes {
   position: absolute;
   left: 158px;
-  top: 35%;
+  top: 50%;
   margin: auto;
   width: 20%;
+  height: 38%;
   overflow-y: scroll;
 }
 .tit {
   background: #f4f4f4;
   margin: 7px;
   padding: 10px 20px;
-  cursor: pointer;
 }
 
 

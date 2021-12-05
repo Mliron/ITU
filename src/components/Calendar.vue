@@ -31,7 +31,6 @@ export default {
   },
   data() {
     return {
-     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSOpd3naVkFzyakD0I9WEN592jxYwTRKunyhsWaUOaUdPqT9ST-C7gG76p_EZyhDPc79M&usqp=CAU",
     }   
   },
   components:{
@@ -45,12 +44,12 @@ export default {
 
 .calendar {
   position: absolute;
-  left:  30%;
+  left:  28%;
   top: 0%;
   margin: auto;
-  width: 40%;
-  height: 25%;
-  
+  width: 42%;
+  height: 90%;
+  overflow-y: scroll;
 }
 .tit_cal{
   background: #f4f4f4;
